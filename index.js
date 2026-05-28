@@ -33,10 +33,9 @@ app.use(express.json());
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "http://159.65.23.201:5900",
-  "https://www.prestigegirlshostel.co.ke",
-  "https://prestigegirlshostel.co.ke",
-  "https://admin.prestigegirlshostel.co.ke"
+  "https://prestige.skirill.org",
+  "https://admin.prestige.skirill.org"
+
 ];
 
 const corsOptions = {
