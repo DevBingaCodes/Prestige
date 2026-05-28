@@ -85,7 +85,6 @@ app.use("/prestige-hostel/v1/users", usersRoute);
 app.use("/prestige-hostel/v1/payments", paymentRoutes);
 app.use("/prestige-hostel/v1/password", require("./routes/password"));
 
-//No Serving
 // Start the server only if not in test environment
 if (process.env.NODE_ENV !== "test") {
   const PORT = process.env.PORT || 5900;
