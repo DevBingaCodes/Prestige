@@ -51,7 +51,7 @@ jobs:
             cd ..
 
             echo "Restarting PM2..."
-            pm2 reload prestige-hostel || pm2 start index.js --name prestige-hostel
+            pm2 reload Prestige || pm2 start index.js --name Prestige
 
             echo "Deployment complete!"
           EOF
