@@ -168,7 +168,7 @@ const signInTenant = async (req, res) => {
       message: "Sign in successful",
       tenant: {
         id: tenant.rows[0].id,
-        firstName: tenant.rows[0].firstname,
+        firstName: tenant.rows[0].firstName,
         email: tenant.rows[0].email,
       },
     });
@@ -209,8 +209,7 @@ const signUpAdmin = async (req, res) => {
   }
 
   // Validate Password Strength
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   if (!passwordRegex.test(password)) {
     return res.status(400).json({
       message:

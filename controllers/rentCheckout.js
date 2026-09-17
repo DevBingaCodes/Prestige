@@ -1,6 +1,4 @@
 const client = require("../config/db");
-const axios = require("axios");
-const moment = require("moment");
 const dotenv = require("dotenv");
 const Stripe = require("stripe");
 const { createNotification } = require("./notifications");
@@ -71,7 +69,7 @@ const createStripeCheckoutSession = async (req, res) => {
 
     // Insert new payment
     const insertPaymentQuery = `INSERT INTO payments (tenant_id, amount, payment_date, payment_method, payment_status) VALUES ($1, $2, $3, $4, $5) RETURNING payment_id`;
-    const values = [tenantId, rentAmount, today, "Stripe", "Pending"];
+    const values = [tenantId, rentAmount, today, "Stripe", "pending"];
     const result = await client.query(insertPaymentQuery, values);
     const paymentId = result.rows[0].payment_id;
 
