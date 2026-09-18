@@ -21,7 +21,7 @@ jobs:
           cache: 'npm'
 
       - name: Install backend dependencies
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Run unit tests
         run: npm test
@@ -48,17 +48,17 @@ jobs:
             git pull origin master
 
             echo "Installing backend dependencies..."
-            npm install --legacy-peer-deps
+            npm ci --legacy-peer-deps
 
             echo "Building client..."
             cd client
-            npm install --legacy-peer-deps
+            npm ci --legacy-peer-deps
             npm run build
             cd ..
 
             echo "Building admin..."
             cd admin
-            npm install --legacy-peer-deps
+            npm ci --legacy-peer-deps
             npm run build
             cd ..
 

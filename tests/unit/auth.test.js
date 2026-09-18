@@ -256,6 +256,16 @@ describe("registerAdmin", () => {
         jest.clearAllMocks();
     });
 
+    it("returns 400 when required admin fields are missing", async () => {
+        const res = createResponse();
+
+        await signUpAdmin({ body: {} }, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({ message: "All fields are required." });
+        expect(client.query).not.toHaveBeenCalled();
+    });
+
     it("successfully registers an admin", async () => {
         const admin = { id: 1, email: "admin@example.com", phoneNumber: "0712345678" };
         bcrypt.hash.mockResolvedValue("hashed-password");
