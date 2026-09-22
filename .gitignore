@@ -2,3 +2,5 @@
 /node_modules
 /database
 prestige-hostel-dashboard.json
+.schema
+.prestige_hostel_20260922_155456.sql

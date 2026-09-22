@@ -15,13 +15,16 @@ const emailRoute = require("./routes/emailService");
 const notificationRoute = require("./routes/notifications");
 const usersRoute = require("./routes/users");
 const paymentRoutes = require("./routes/payments");
-const metrictsRoute = require("./routes/metrics")
+const metricsRoute = require("./routes/metrics")
 
 //Import PG client from the config directory
 require("./config/db");
 
 dotenv.config();
 const app = express();
+
+const { trackHttpRequests } = require("./controllers/metrics");
+app.use(trackHttpRequests);
 
 //Webhook Route
 app.use("/prestige-hostel/v1/webhook", require("./routes/webhook"));
@@ -54,24 +57,9 @@ app.use(cors(corsOptions));
 //Cookie Parser
 app.use(cookieParser());
 
-//Track Requests
-const { httpRequestCounter } = require("./controllers/metrics");
-
-app.use((req, res, next) => {
-  res.on("finish", () => {
-    httpRequestCounter.inc({
-      method: req.method,
-      route: req.route ? req.route.path : req.path,
-      status_code: res.statusCode
-    });
-  });
-  next();
-});
-
-
 //Routes
 app.use("/prestige-hostel/v1/auth", authRoute);
-app.use("/prestige-hostel/v1/metrics", metrictsRoute)
+app.use("/prestige-hostel/v1/metrics", metricsRoute)
 app.use("/prestige-hostel/v1/verify", emailRoute);
 app.use("/prestige-hostel/v1/tenants", tenantRoute);
 app.use("/prestige-hostel/v1/rooms", roomsRoute);
